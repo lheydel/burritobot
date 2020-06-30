@@ -49,7 +49,8 @@ bot.on('message', async (message) => {
   }
 
   const [cmd, ...textArray] = content.substring(1).split(' ')
-  const text = textArray.join(' ')
+  const text = textArray.filter(s => s != '-v').join(' ')
+  const verbose = textArray.includes('-v')
   
   switch(cmd) {
     case 'cmd':
@@ -74,8 +75,10 @@ bot.on('message', async (message) => {
     //   channel.send('!spam')
     //   break;
     case 'noise': 
-        message.delete()
       const msg = await channel.send(text, { tts: true })
+      if (!verbose) {
+        message.delete()
         msg.delete()
       }
+  }
 })
