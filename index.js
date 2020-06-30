@@ -1,4 +1,8 @@
 const Discord = require('discord.js')
+const { Emoji } = require('./emoji')
+
+const BURRITAL = new Emoji('burrital', '369550219173429259')
+const BURRITOEL = new Emoji('burritoel', '526907423160533012')
 
 const OUI = new Emoji('oui', '593794204598272001')
 const NON = new Emoji('non', '595161673438855168')
@@ -31,6 +35,14 @@ bot.on('message', async (message) => {
 
     if (Math.random() <= 0.002) {
       channel.send(Math.random <= 0.5 ? OK1 : OK2)
+    }
+
+    if (content.includes('burrito')) {
+      message.react(BURRITAL.id)
+    }
+
+    if (content.includes('noel')) {
+      message.react(BURRITOEL.id)
     }
 
     return
