@@ -54,6 +54,7 @@ bot.on('message', async (message) => {
   
   switch(cmd) {
     case 'cmd':
+      message.delete()
       channel.send('Commands: ' + ['blblbl', 'ok', 'pd', 'noise'].join(', '))
       break
     case 'blblbl':
@@ -75,9 +76,9 @@ bot.on('message', async (message) => {
     //   channel.send('!spam')
     //   break;
     case 'noise': 
+      message.delete()
       const msg = await channel.send(text, { tts: true })
       if (!verbose) {
-        message.delete()
         msg.delete()
       }
   }
