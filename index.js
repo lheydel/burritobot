@@ -45,6 +45,10 @@ bot.on('message', async (message) => {
       message.react(BURRITOEL.id)
     }
 
+    if (['bot', 'pue'].every(s => content.includes(s))) {
+      message.react(SAD.id)
+    }
+
     return
   }
 
