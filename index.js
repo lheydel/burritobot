@@ -28,13 +28,13 @@ bot.on('message', async (message) => {
   if (content[0] !== '!') {
     if (content.endsWith('?') && Math.random() <= 0.05) {
       const rdm = Math.random()
-      rdm <= 0.495 ? channel.send(OUI)
-        : rdm <= 0.99 ? channel.send(NON)
-        : channel.send(MAYBE)
+      rdm <= 0.495 ? channel.send(OUI.string)
+        : rdm <= 0.99 ? channel.send(NON.string)
+        : channel.send(MAYBE.string)
     }
 
     if (Math.random() <= 0.002) {
-      channel.send(Math.random <= 0.5 ? OK1 : OK2)
+      channel.send(Math.random <= 0.5 ? OK1.string : OK2.string)
     }
 
     if (content.includes('burrito')) {
@@ -61,11 +61,11 @@ bot.on('message', async (message) => {
       break
     case 'ok': 
       message.delete()
-      channel.send(OK1)
+      channel.send(OK1.string)
       break
     case 'pd':
       message.delete()
-      channel.send(PD)
+      channel.send(PD.string)
       break;
     // case 'spam':
     //   await new Promise(r => setTimeout(r, (Math.floor(Math.random() * 15) + 30) * 1000));
@@ -74,8 +74,8 @@ bot.on('message', async (message) => {
     //   channel.send('!spam')
     //   break;
     case 'noise': 
-      message.delete()
+        message.delete()
       const msg = await channel.send(text, { tts: true })
-      msg.delete()
-  }
+        msg.delete()
+      }
 })
