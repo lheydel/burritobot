@@ -1,14 +1,14 @@
 const Discord = require('discord.js')
 
-const OUI = '<:oui:593794204598272001>'
-const NON = '<:non:595161673438855168>'
-const MAYBE = '<:maybe:596709528280629267>'
+const OUI = new Emoji('oui', '593794204598272001')
+const NON = new Emoji('non', '595161673438855168')
+const MAYBE = new Emoji('maybe', '596709528280629267')
 
-const OK = '<:OK:369541026404237312>'
-const Ok = '<:Ok:655871904548126741>'
+const OK1 = new Emoji('OK1', '369541026404237312')
+const OK2 = new Emoji('OK2', '655871904548126741')
 
-const PD = '<:PD:513834875418312723>'
-const SAD = '<:sad:369883690479648768>'
+const PD = new Emoji('PD', '513834875418312723')
+const SAD = new Emoji('sad', '369883690479648768')
 
 const bot = new Discord.Client()
 bot.login(process.env.BOT_TOKEN)
@@ -30,7 +30,7 @@ bot.on('message', async (message) => {
     }
 
     if (Math.random() <= 0.002) {
-      channel.send(Math.random <= 0.5 ? OK : Ok)
+      channel.send(Math.random <= 0.5 ? OK1 : OK2)
     }
 
     return
@@ -49,7 +49,7 @@ bot.on('message', async (message) => {
       break
     case 'ok': 
       message.delete()
-      channel.send(OK)
+      channel.send(OK1)
       break
     case 'pd':
       message.delete()
