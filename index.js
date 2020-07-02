@@ -22,7 +22,7 @@ bot.on('ready', () => {
 })
 
 bot.on('message', async (message) => {
-  const content = message.content
+  const content = message.content.toLowerCase()
   const channel = message.channel
 
   if (content[0] !== '!') {
