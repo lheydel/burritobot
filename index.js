@@ -1,5 +1,8 @@
 const Discord = require('discord.js')
+const fetch = require('node-fetch')
 const { Emoji } = require('./emoji')
+
+const TENOR_TOKEN = process.env.TENOR_TOKEN
 
 const BURRITAL = new Emoji('burrital', '369550219173429259')
 const BURRITOEL = new Emoji('burritoel', '526907423160533012')
@@ -59,7 +62,7 @@ bot.on('message', async (message) => {
   switch(cmd) {
     case 'cmd':
       message.delete()
-      channel.send('Commands: ' + ['blblbl', 'ok', 'pd', 'noise'].join(', '))
+      channel.send('Commands: ' + ['blblbl', 'ok', 'pd', 'noise', 'gif'].join(', '))
       break
     case 'blblbl':
       message.delete()
@@ -72,7 +75,7 @@ bot.on('message', async (message) => {
     case 'pd':
       message.delete()
       channel.send(PD.string)
-      break;
+      break
     // case 'spam':
     //   await new Promise(r => setTimeout(r, (Math.floor(Math.random() * 15) + 30) * 1000));
     //   channel.send('!spam')
@@ -85,5 +88,20 @@ bot.on('message', async (message) => {
       if (!verbose) {
         msg.delete()
       }
+      break
+    case 'gif':
+      message.delete()
+
+      const query = text.trim().length > 0 ? text :  'burrito'
+      const params = [`q=${query}`, `key=${TENOR_TOKEN}`, 'limit=50'].join('&')
+
+      fetch(`https://api.tenor.com/v1/search?${params}`)
+        .then(res => res.json())
+        .then(json => {
+          const nbGifs = json.results.length
+          const iGif = Math.ceil(Math.random() * nbGifs)
+          channel.send(json.results[iGif].itemurl)
+        })
+      break
   }
 })
