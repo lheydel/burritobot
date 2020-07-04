@@ -1,8 +1,7 @@
 const Discord = require('discord.js')
-const fetch = require('node-fetch')
 const { Emoji } = require('./emoji')
-
-const TENOR_TOKEN = process.env.TENOR_TOKEN
+const { fetchGif } = require('./external')
+const { isEmptyString } = require('./utils')
 
 const BURRITAL = new Emoji('burrital', '369550219173429259')
 const BURRITOEL = new Emoji('burritoel', '526907423160533012')
@@ -48,6 +47,10 @@ bot.on('message', async (message) => {
       message.react(BURRITOEL.id)
     }
 
+    if (content.includes('itk')) {
+      channel.send(await fetchGif('cow'))
+    }
+
     if (['bot', 'pue'].every(s => content.includes(s))) {
       message.react(SAD.id)
     }
@@ -91,17 +94,8 @@ bot.on('message', async (message) => {
       break
     case 'gif':
       message.delete()
-
-      const query = text.trim().length > 0 ? text :  'burrito'
-      const params = [`q=${query}`, `key=${TENOR_TOKEN}`, 'limit=50'].join('&')
-
-      fetch(`https://api.tenor.com/v1/search?${params}`)
-        .then(res => res.json())
-        .then(json => {
-          const nbGifs = json.results.length
-          const iGif = Math.ceil(Math.random() * nbGifs)
-          channel.send(json.results[iGif].itemurl)
-        })
+      const query = isEmptyString(text) ? 'burrito' : text
+      channel.send(await fetchGif(query))
       break
   }
 })
