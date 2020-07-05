@@ -37,7 +37,7 @@ module.exports = {
 
     OK1, 
     OK2, 
-    
+
     PD, 
     SAD
- }
+}

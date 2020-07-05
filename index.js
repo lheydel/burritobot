@@ -2,7 +2,8 @@ const Discord = require('discord.js')
 const { fetchGif } = require('./external')
 const { isEmptyString } = require('./utils')
 
-const { BURRITAL, BURRITOEL, OUI, NON, MAYBE, OK1, OK2, PD, SAD } = require('./emoji')
+const { OUI, NON, MAYBE, OK1, OK2, PD, SAD } = require('./emoji')
+const { react } = require('./reaction')
 
 const bot = new Discord.Client()
 bot.login(process.env.BOT_TOKEN)
@@ -27,17 +28,7 @@ bot.on('message', async (message) => {
       channel.send(Math.random <= 0.5 ? OK1.string : OK2.string)
     }
 
-    if (content.includes('burrito')) {
-      message.react(BURRITAL.id)
-    }
-
-    if (content.includes('noel')) {
-      message.react(BURRITOEL.id)
-    }
-
-    if (content.includes('itk')) {
-      channel.send(await fetchGif('cow'))
-    }
+    react(message)
 
     if (['bot', 'pue'].every(s => content.includes(s))) {
       message.react(SAD.id)
