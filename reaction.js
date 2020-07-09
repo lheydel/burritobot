@@ -42,7 +42,7 @@ function react(message) {
     const content = message.content.toLowerCase()
 
     REACTIONS.filter(reaction => content.includes(reaction.pattern))
-      .forEach(reaction => reaction.sendResponse())
+      .forEach(reaction => reaction.sendResponse(message))
 }
 
 module.exports = { react }
