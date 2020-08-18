@@ -3,6 +3,7 @@ const { fetchGif } = require('./external')
 const { isEmptyString } = require('./utils')
 
 const { OUI, NON, MAYBE, OK1, OK2, PD, SAD } = require('./emoji')
+const { getUserById } = require('./user')
 const { react } = require('./reaction')
 
 const bot = new Discord.Client()
@@ -15,6 +16,7 @@ bot.on('ready', () => {
 bot.on('message', async (message) => {
   const content = message.content.toLowerCase()
   const channel = message.channel
+  const author = message.author
 
   if (content[0] !== '!') {
     if (content.endsWith('?') && Math.random() <= 0.05) {
@@ -74,7 +76,8 @@ bot.on('message', async (message) => {
     case 'gif':
       message.delete()
       const query = isEmptyString(text) ? 'burrito' : text
-      channel.send(await fetchGif(query))
+      const gifMsg = await channel.send(await fetchGif(query))
+      gifMsg.react(getUserById(author.id).gifReaction.id)
       break
   }
 })

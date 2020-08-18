@@ -27,6 +27,10 @@ const OK2 = new Emoji('OK2', '655871904548126741')
 const PD = new Emoji('PD', '513834875418312723')
 const SAD = new Emoji('sad', '369883690479648768')
 
+const CLOCHETTE = new Emoji('Clochette', '369544749121798144') 
+const BRINDILLE = new Emoji('brindille', '369549173189640192') 
+const BOB = new Emoji('bob', '369882624681836544')
+
 module.exports = { 
     BURRITAL, 
     BURRITOEL, 
@@ -39,5 +43,9 @@ module.exports = {
     OK2, 
 
     PD, 
-    SAD
+    SAD,
+
+    CLOCHETTE,
+    BRINDILLE,
+    BOB
 }
