@@ -34,6 +34,7 @@ class Reaction {
 
 const REACTIONS = [
     new Reaction('burrito', TYPE_REACT, () => BURRITAL.id),
+    new Reaction('burrital', TYPE_REACT, () => BURRITAL.id),
     new Reaction('noel', TYPE_REACT, () => BURRITOEL.id),
     new Reaction('itk', TYPE_WRITE, () => fetchGif('cow')),
     new Reaction('jpp', TYPE_WRITE, () => fetchGif('jean-pierre polnareff'))
