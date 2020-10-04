@@ -27,7 +27,7 @@ bot.on('message', async (message) => {
     }
 
     if (Math.random() <= 0.002) {
-      channel.send(Math.random <= 0.5 ? OK1.string : OK2.string)
+      channel.send(Math.random() <= 0.5 ? OK1.string : OK2.string)
     }
 
     react(message)
