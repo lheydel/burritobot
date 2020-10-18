@@ -2,8 +2,8 @@ const fetch = require('node-fetch')
 
 const TENOR_TOKEN = process.env.TENOR_TOKEN
 
-async function fetchGif(query) {
-  const params = [`q=${query}`, `key=${TENOR_TOKEN}`, 'limit=50'].join('&')
+async function fetchGif(query, limit = 50) {
+  const params = [`q=${query}`, `key=${TENOR_TOKEN}`, `limit=${limit}`].join('&')
 
   return fetch(`https://api.tenor.com/v1/search?${params}`)
     .then(res => res.json())

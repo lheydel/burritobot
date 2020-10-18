@@ -37,7 +37,8 @@ const REACTIONS = [
     new Reaction('burrital', TYPE_REACT, () => BURRITAL.id),
     new Reaction('noel', TYPE_REACT, () => BURRITOEL.id),
     new Reaction('itk', TYPE_WRITE, () => fetchGif('cow')),
-    new Reaction('jpp', TYPE_WRITE, () => fetchGif('jean-pierre polnareff'))
+    new Reaction('jpp', TYPE_WRITE, () => fetchGif('jean-pierre polnareff')),
+    new Reaction('omg', TYPE_WRITE, () => fetchGif('oh my god jojo', 10))
 ]
 
 function react(message) {
