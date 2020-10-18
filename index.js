@@ -19,7 +19,7 @@ bot.on('message', async (message) => {
   const author = message.author
 
   if (content[0] !== '!') {
-    if (content.endsWith('?') && Math.random() <= 0.05) {
+    if (content.endsWith('?') && Math.random() <= 0.01) {
       const rdm = Math.random()
       rdm <= 0.495 ? channel.send(OUI.string)
         : rdm <= 0.99 ? channel.send(NON.string)
