@@ -1,4 +1,4 @@
-const { CLOCHETTE, BRINDILLE, BOB } = require("./emoji")
+const { CLOCHETTE, BRINDILLE, BOB, BURRITAL } = require("./emoji")
 
 class User {
     id = ''
@@ -19,15 +19,17 @@ class User {
 const HYRLOS = new User('168333966716174337', CLOCHETTE)
 const LOUEC = new User('160483264761430016', BRINDILLE)
 const MROHMS = new User('366581141118910464', BOB)
+const BOT = new User('726715798676176947', BURRITAL)
 
 function getUserById(id) {
-    return [HYRLOS, LOUEC, MROHMS].find(user => user.id === id)
+    return [HYRLOS, LOUEC, MROHMS, BOT].find(user => user.id === id)
 }
 
 module.exports = { 
     HYRLOS,
     LOUEC,
     MROHMS,
+    BOT,
 
     getUserById
 }

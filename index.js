@@ -2,9 +2,9 @@ const Discord = require('discord.js')
 const { fetchGif } = require('./external')
 const { isEmptyString } = require('./utils')
 const { OUI, NON, MAYBE, OK1, OK2, PD, SAD } = require('./emoji')
-const { getUserById } = require('./user')
+const { getUserById, BOT } = require('./user')
 const { react } = require('./reaction')
-const { selectInsult } = require('./insult')
+const { selectInsult, selectCompliment } = require('./insult')
 
 const bot = new Discord.Client()
 bot.login(process.env.BOT_TOKEN)
@@ -81,8 +81,9 @@ bot.on('message', async (message) => {
       break
     case 'insult':
       message.delete()
-      const insult = selectInsult(message)
-      const insultMsg = await channel.send(`${text.split(' ')[0]} ${insult}`)
+      const target = text.split(' ')[0]
+      const insult = target === BOT.toString() ? selectCompliment() : selectInsult()
+      const insultMsg = await channel.send(`${target} ${insult}`)
       sign(insultMsg, author)
   }
 })

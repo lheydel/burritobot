@@ -16,12 +16,16 @@ class Insulter {
 const INSULTERS = [
     new Insulter(5, () => insult.Insult()),
     new Insulter(50, () => insults.default()),
-    new Insulter(45, () => randomInt(100) < 5 ? insultCompliment.Compliment() : insultCompliment.Insult())
+    new Insulter(45, () => insultCompliment.Insult())
 ]
 
 function selectInsult() {
     const insulter = chooseInsulter()
     return insulter.getInsult()
+}
+
+function selectCompliment() {
+    return insultCompliment.Compliment()
 }
 
 function chooseInsulter() {
@@ -34,9 +38,9 @@ function chooseInsulter() {
             return INSULTERS[i]
         }
     }
-
 }
 
 module.exports = {
-    selectInsult
+    selectInsult,
+    selectCompliment
 }
