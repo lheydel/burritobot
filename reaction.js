@@ -6,12 +6,12 @@ TYPE_WRITE = 'write'
 // TYPE_RESPOND = 'respond'
 
 class Reaction {
-    pattern = ''
+    patterns = []
     type = TYPE_WRITE
     responseGetter = async () => ''
 
-    constructor(pattern, type, responseGetter) {
-        this.pattern = pattern
+    constructor(patterns, type, responseGetter) {
+        this.patterns = patterns
         this.responseGetter = responseGetter
         this.type = type
     }
@@ -30,21 +30,24 @@ class Reaction {
         }
       }
     }
+
+    matches(text) {
+      return this.patterns.some(pattern => text.includes(pattern))
+    }
 }
 
 const REACTIONS = [
-    new Reaction('burrito', TYPE_REACT, () => BURRITAL.id),
-    new Reaction('burrital', TYPE_REACT, () => BURRITAL.id),
-    new Reaction('noel', TYPE_REACT, () => BURRITOEL.id),
-    new Reaction('itk', TYPE_WRITE, () => fetchGif('cow')),
-    new Reaction('jpp', TYPE_WRITE, () => fetchGif('jean-pierre polnareff')),
-    new Reaction('omg', TYPE_WRITE, () => fetchGif('oh my god jojo', 10))
+    new Reaction(['burrito', 'burrital'], TYPE_REACT, () => BURRITAL.id),
+    new Reaction(['noel'], TYPE_REACT, () => BURRITOEL.id),
+    new Reaction(['itk'], TYPE_WRITE, () => fetchGif('cow')),
+    new Reaction(['jpp'], TYPE_WRITE, () => fetchGif('jean-pierre polnareff')),
+    new Reaction(['omg'], TYPE_WRITE, () => fetchGif('oh my god jojo', 10))
 ]
 
 function react(message) {
     const content = message.content.toLowerCase()
 
-    REACTIONS.filter(reaction => content.includes(reaction.pattern))
+    REACTIONS.filter(reaction => reaction.matches(content))
       .forEach(reaction => reaction.sendResponse(message))
 }
 
