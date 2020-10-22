@@ -46,7 +46,7 @@ bot.on('message', async (message) => {
   switch(cmd) {
     case 'cmd':
       message.delete()
-      channel.send('Commands: ' + ['blblbl', 'ok', 'pd', 'noise', 'gif'].join(', '))
+      channel.send('Commands: ' + ['blblbl', 'ok', 'pd', 'noise', 'gif', 'insult'].join(', '))
       break
     case 'blblbl':
       message.delete()
