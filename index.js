@@ -77,11 +77,16 @@ bot.on('message', async (message) => {
       message.delete()
       const query = isEmptyString(text) ? 'burrito' : text
       const gifMsg = await channel.send(await fetchGif(query))
-      gifMsg.react(getUserById(author.id).gifReaction.id)
+      sign(gifMsg, author)
       break
     case 'insult':
       message.delete()
       const insult = selectInsult(message)
       const insultMsg = await channel.send(`${text.split(' ')[0]} ${insult}`)
+      sign(insultMsg, author)
   }
 })
+
+function sign(message, author) {
+  message.react(getUserById(author.id).gifReaction.id)
+}
