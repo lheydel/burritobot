@@ -1,10 +1,10 @@
 const Discord = require('discord.js')
 const { fetchGif } = require('./external')
 const { isEmptyString } = require('./utils')
-
 const { OUI, NON, MAYBE, OK1, OK2, PD, SAD } = require('./emoji')
 const { getUserById } = require('./user')
 const { react } = require('./reaction')
+const { selectInsult } = require('./insult')
 
 const bot = new Discord.Client()
 bot.login(process.env.BOT_TOKEN)
@@ -79,5 +79,9 @@ bot.on('message', async (message) => {
       const gifMsg = await channel.send(await fetchGif(query))
       gifMsg.react(getUserById(author.id).gifReaction.id)
       break
+    case 'insult':
+      message.delete()
+      const insult = selectInsult(message)
+      const insultMsg = await channel.send(`${text.split(' ')[0]} ${insult}`)
   }
 })
