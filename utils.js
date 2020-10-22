@@ -3,6 +3,11 @@ function isEmptyString(str) {
         && (str == null || str.trim().length === 0)
 }
 
+function randomInt(max) {
+    return Math.ceil(Math.random() * max - 1)
+}
+
 module.exports = {
-    isEmptyString
+    isEmptyString,
+    randomInt
 }

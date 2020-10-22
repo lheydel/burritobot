@@ -1,4 +1,5 @@
 const fetch = require('node-fetch')
+const { randomInt } = require('./utils')
 
 const TENOR_TOKEN = process.env.TENOR_TOKEN
 
@@ -9,7 +10,7 @@ async function fetchGif(query, limit = 50) {
     .then(res => res.json())
     .then(json => {
       const nbGifs = json.results.length
-      const iGif = Math.ceil(Math.random() * nbGifs - 1)
+      const iGif = randomInt(nbGifs)
       const gif = json.results[iGif]
       return gif == null ? `Aucun gif trouvé pour la requête : "${query}"` : gif.itemurl
     })
