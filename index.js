@@ -5,6 +5,7 @@ const { OUI, NON, MAYBE, OK1, OK2, PD, SAD } = require('./emoji')
 const { getUserById, BOT } = require('./user')
 const { react } = require('./reaction')
 const { selectInsult, selectCompliment } = require('./insult')
+const { remove: unaccent } = require('diacritics')
 
 const bot = new Discord.Client()
 bot.login(process.env.BOT_TOKEN)
@@ -14,12 +15,12 @@ bot.on('ready', () => {
 })
 
 bot.on('message', async (message) => {
-  const content = message.content.toLowerCase()
+  const contentNormalized = unaccent(message.content.toLowerCase().trim())
   const channel = message.channel
   const author = message.author
 
-  if (content[0] !== '!') {
-    if (content.endsWith('?') && Math.random() <= 0.01) {
+  if (contentNormalized[0] !== '!') {
+    if (contentNormalized.endsWith('?') && Math.random() <= 0.01) {
       const rdm = Math.random()
       rdm <= 0.495 ? channel.send(OUI.string)
         : rdm <= 0.99 ? channel.send(NON.string)
@@ -32,14 +33,14 @@ bot.on('message', async (message) => {
 
     react(message)
 
-    if (['bot', 'pue'].every(s => content.includes(s))) {
+    if (['bot', 'pue'].every(s => contentNormalized.includes(s))) {
       message.react(SAD.id)
     }
 
     return
   }
 
-  const [cmd, ...textArray] = content.substring(1).split(' ')
+  const [cmd, ...textArray] = contentNormalized.substring(1).split(' ')
   const text = textArray.filter(s => s != '-v').join(' ')
   const verbose = textArray.includes('-v')
   
