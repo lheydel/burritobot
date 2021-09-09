@@ -30,6 +30,12 @@ const SAD = new Emoji('sad', '369883690479648768')
 const CLOCHETTE = new Emoji('Clochette', '369544749121798144') 
 const BRINDILLE = new Emoji('brindille', '369549173189640192') 
 const BOB = new Emoji('bob', '369882624681836544')
+ 
+const SIXSIXSIX = new Emoji('666', '542832941064126464') 
+const NINENINENINE = new Emoji('999', '539495256916361228')
+
+const CHECK = new Emoji('vu', '546821321984835591')
+const VALID = new Emoji('valid', '606111192121081867')
 
 module.exports = { 
     BURRITAL, 
@@ -47,5 +53,11 @@ module.exports = {
 
     CLOCHETTE,
     BRINDILLE,
-    BOB
+    BOB,
+    
+    SIXSIXSIX,
+    NINENINENINE,
+    
+    CHECK,
+    VALID
 }
