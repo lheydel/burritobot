@@ -37,11 +37,11 @@ bot.on('message', async (message) => {
       message.react(SAD.id)
     }
 
-		// Emoji :666: receive
+		// Emoji :666: received
     if (content.includes(SIXSIXSIX.string)) {
       message.react(NINENINENINE.id)
     }
-		// Emoji :999: receive
+		// Emoji :999: received
     if (content.includes(NINENINENINE.string) || content.includes(" 666")) {
       message.react(SIXSIXSIX.id)
     }
