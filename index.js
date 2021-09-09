@@ -37,10 +37,13 @@ bot.on('message', async (message) => {
       message.react(SAD.id)
     }
 
-    if (content == "k") {
-      message.delete()
-      const checkMsg = await channel.send(CHECK.string)
-      sign(checkMsg, author)
+		# Emoji :666: receive
+    if (content.includes("<:666:542832941064126464>")) {
+      message.react(NINENINENINE.id)
+    }
+		# Emoji :999: receive
+    if (content.includes("<:999:539495256916361228>") || content.includes(" 666")) {
+      message.react(SIXSIXSIX.id)
     }
 
     if (content == "k") {
