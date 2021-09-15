@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const { fetchGif } = require('./external')
 const { isEmptyString } = require('./utils')
-const { OUI, NON, MAYBE, OK1, OK2, PD, SAD } = require('./emoji')
+const { OUI, NON, MAYBE, OK1, OK2, PD, SAD, SIXSIXSIX, NINENINENINE, CHECK} = require('./emoji')
 const { getUserById, BOT } = require('./user')
 const { react } = require('./reaction')
 const { selectInsult, selectCompliment } = require('./insult')
@@ -18,6 +18,7 @@ bot.on('message', async (message) => {
   const channel = message.channel
   const author = message.author
 
+  
   if (content[0] !== '!') {
     if (content.endsWith('?') && Math.random() <= 0.01) {
       const rdm = Math.random()
@@ -36,6 +37,21 @@ bot.on('message', async (message) => {
       message.react(SAD.id)
     }
 
+		// Emoji :666: received
+    if (content.includes(SIXSIXSIX.string)) {
+      message.react(NINENINENINE.id)
+    }
+		// Emoji :999: received
+    if (content.includes(NINENINENINE.string) || content.includes(" 666")) {
+      message.react(SIXSIXSIX.id)
+    }
+
+    if (content == "k") {
+      message.delete()
+      const checkMsg = await channel.send(CHECK.string)
+      sign(checkMsg, author)
+    }
+    
     return
   }
 
