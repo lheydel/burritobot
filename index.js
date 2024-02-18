@@ -39,15 +39,15 @@ bot.on('message', async (message) => {
       message.react(SAD.id)
     }
 
-    if (content.includes(SIXSIXSIX.string)) {
+    if (contentNormalized.includes(SIXSIXSIX.string)) {
       message.react(NINENINENINE.id)
     }
 
-    if (content.includes(NINENINENINE.string) || content.includes(" 666")) {
+    if (contentNormalized.includes(NINENINENINE.string) || contentNormalized.includes("666")) {
       message.react(SIXSIXSIX.id)
     }
 
-    if (content == "k") {
+    if (contentNormalized == "k") {
       message.delete()
       const checkMsg = await channel.send(CHECK.string)
       sign(checkMsg, author)
