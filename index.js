@@ -7,6 +7,8 @@ const { react } = require('./reaction')
 const { selectInsult, selectCompliment } = require('./insult')
 const { remove: unaccent } = require('diacritics')
 
+require('dotenv').config()
+
 const bot = new Discord.Client()
 bot.login(process.env.BOT_TOKEN)
 
