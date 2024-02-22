@@ -1,6 +1,7 @@
 const fetch = require('node-fetch')
 const { randomInt } = require('./utils')
 
+require('dotenv').config()
 const TENOR_TOKEN = process.env.TENOR_TOKEN
 
 async function fetchGif(query, limit = 50) {
