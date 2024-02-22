@@ -98,7 +98,7 @@ bot.on('message', async (message) => {
       break
     case 'insult':
       message.delete()
-      const target = message.content.substring(message.content.indexOf(' '))
+      const target = message.content.substring(message.content.indexOf(' ')).trim()
       const insult = isBot(target) ? selectCompliment() : selectInsult()
       const insultToSend = insult.substring(0, 1).toLowerCase() + insult.substring(1)
       const insultMsg = await channel.send(`${target}, ${insultToSend}`)
