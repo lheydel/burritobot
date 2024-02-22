@@ -12,7 +12,7 @@ class User {
     }
 
     toString() {
-        return `<@!${this.id}>`
+        return `<@${this.id}>`
     }
 }
 
@@ -27,6 +27,7 @@ function getUserById(id) {
 }
 
 function isBot(string) {
+    console.log("[" + string + "]", `[${BOT_BTEAM.toString()}]`)
     return [BOT_SOLO, BOT_BTEAM, 'burritobot', 'bot'].some(user => user.toString() === string)
 }
 
