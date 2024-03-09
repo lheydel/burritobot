@@ -1,4 +1,4 @@
-const { BURRITAL, BURRITOEL } = require("./emoji")
+const { BURRITAL, BURRITOEL, SIXSIXSIX, NINENINENINE } = require("./emoji")
 const { fetchGif } = require("./external")
 
 TYPE_REACT = 'react'
@@ -38,6 +38,9 @@ class Reaction {
 
 const REACTIONS = [
     new Reaction(['burrito', 'burrital'], TYPE_REACT, () => BURRITAL.id),
+    new Reaction([NINENINENINE.string, '666'], TYPE_REACT, () => SIXSIXSIX.id),
+    new Reaction([SIXSIXSIX.string], TYPE_REACT, () => NINENINENINE.id),
+    new Reaction(['metal'], TYPE_REACT, () => '🤘'),
     new Reaction(['noel'], TYPE_REACT, () => BURRITOEL.id),
     new Reaction(['itk'], TYPE_WRITE, () => fetchGif('cow')),
     new Reaction(['jpp'], TYPE_WRITE, () => fetchGif('jean-pierre polnareff')),
