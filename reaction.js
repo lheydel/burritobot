@@ -1,5 +1,6 @@
 const { BURRITAL, BURRITOEL, SIXSIXSIX, NINENINENINE } = require("./emoji")
 const { fetchGif } = require("./external")
+const { remove: unaccent } = require('diacritics')
 
 TYPE_REACT = 'react'
 TYPE_WRITE = 'write'
@@ -48,7 +49,7 @@ const REACTIONS = [
 ]
 
 function react(message) {
-    const content = message.content.toLowerCase()
+    const content = unaccent(message.content.toLowerCase().trim())
 
     REACTIONS.filter(reaction => reaction.matches(content))
       .forEach(reaction => reaction.sendResponse(message))
