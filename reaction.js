@@ -20,6 +20,7 @@ class Reaction {
     async sendResponse(message) {
       const channel = message.channel
       const response = await this.responseGetter()
+      if (response == null) return
 
       switch (this.type) {
         case TYPE_WRITE:
@@ -43,9 +44,9 @@ const REACTIONS = [
     new Reaction([SIXSIXSIX.string], TYPE_REACT, () => NINENINENINE.id),
     new Reaction(['metal'], TYPE_REACT, () => '🤘'),
     new Reaction(['noel'], TYPE_REACT, () => BURRITOEL.id),
-    new Reaction(['itk'], TYPE_WRITE, () => fetchGif('cow')),
-    new Reaction(['jpp'], TYPE_WRITE, () => fetchGif('jean-pierre polnareff')),
-    new Reaction(['omg'], TYPE_WRITE, () => fetchGif('oh my god jojo', 10))
+    new Reaction(['itk'], TYPE_WRITE, () => Math.random() <= 0.1 ? fetchGif('cow') : null),
+    // new Reaction(['jpp'], TYPE_WRITE, () => fetchGif('jean-pierre polnareff')),
+    // new Reaction(['omg'], TYPE_WRITE, () => fetchGif('oh my god jojo', 10))
 ]
 
 function react(message) {

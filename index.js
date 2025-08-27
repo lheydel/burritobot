@@ -39,7 +39,7 @@ bot.on('message', async (message) => {
       message.react(SAD.id)
     }
 
-    if (contentNormalized == "k") {
+    if (contentNormalized === "k") {
       message.delete()
       const checkMsg = await channel.send(CHECK.string)
       sign(checkMsg, author)
