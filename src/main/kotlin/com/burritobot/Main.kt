@@ -8,6 +8,8 @@ import dev.kord.core.on
 import dev.kord.gateway.Intent
 import dev.kord.gateway.PrivilegedIntent
 import org.koin.core.context.startKoin
+import org.koin.core.parameter.parametersOf
+import org.koin.java.KoinJavaComponent.getKoin
 import org.slf4j.LoggerFactory
 
 private val logger = LoggerFactory.getLogger("BurritoBot")
@@ -19,6 +21,9 @@ suspend fun main() {
     }
 
     val kord = Kord(Config.botToken)
+    val bot: BurritoBot = getKoin().get { parametersOf(kord) }
+
+    bot.setupListeners()
 
     kord.on<ReadyEvent> {
         logger.info("Logged in as ${kord.getSelf().username}")
