@@ -1,4 +1,4 @@
-package com.burritobot.config
+package com.burritobot
 
 object Config {
     val botToken: String by lazy { getRequiredEnv("BOT_TOKEN") }

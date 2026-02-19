@@ -1,7 +1,7 @@
-package com.burritobot.reaction
+package com.burritobot
 
-import com.burritobot.emoji.Emoji
-import com.burritobot.external.TenorClient
+import com.burritobot.model.Emoji
+import com.burritobot.service.TenorClient
 import com.burritobot.util.chance
 import dev.kord.core.entity.Message
 import dev.kord.core.entity.ReactionEmoji

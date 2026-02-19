@@ -1,7 +1,7 @@
 package com.burritobot.command
 
-import com.burritobot.insult.InsultService
-import com.burritobot.user.UserRepository
+import com.burritobot.model.UserRepository
+import com.burritobot.service.InsultService
 import com.burritobot.util.sign
 import dev.kord.core.entity.Message
 

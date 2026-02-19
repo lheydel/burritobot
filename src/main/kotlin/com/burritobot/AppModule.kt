@@ -1,6 +1,5 @@
-package com.burritobot.di
+package com.burritobot
 
-import com.burritobot.BurritoBot
 import com.burritobot.command.BlblblCommand
 import com.burritobot.command.CmdCommand
 import com.burritobot.command.Command
@@ -10,10 +9,8 @@ import com.burritobot.command.InsultCommand
 import com.burritobot.command.NoiseCommand
 import com.burritobot.command.OkCommand
 import com.burritobot.command.PdCommand
-import com.burritobot.config.Config
-import com.burritobot.external.TenorClient
-import com.burritobot.insult.InsultService
-import com.burritobot.reaction.ReactionHandler
+import com.burritobot.service.InsultService
+import com.burritobot.service.TenorClient
 import dev.kord.core.Kord
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO

@@ -1,4 +1,4 @@
-package com.burritobot.external
+package com.burritobot.service
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body

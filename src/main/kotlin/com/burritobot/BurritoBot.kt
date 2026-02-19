@@ -1,8 +1,7 @@
 package com.burritobot
 
 import com.burritobot.command.CommandHandler
-import com.burritobot.emoji.Emoji
-import com.burritobot.reaction.ReactionHandler
+import com.burritobot.model.Emoji
 import com.burritobot.util.chance
 import com.burritobot.util.normalize
 import com.burritobot.util.sign

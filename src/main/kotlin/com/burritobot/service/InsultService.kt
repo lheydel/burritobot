@@ -1,4 +1,4 @@
-package com.burritobot.insult
+package com.burritobot.service
 
 class InsultService {
     private val insults = loadResource("/insults/insults.txt")

@@ -1,6 +1,6 @@
 package com.burritobot.util
 
-import com.burritobot.user.UserRepository
+import com.burritobot.model.UserRepository
 import dev.kord.common.entity.Snowflake
 import dev.kord.core.entity.Message
 

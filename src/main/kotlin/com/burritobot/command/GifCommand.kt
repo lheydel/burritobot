@@ -1,6 +1,6 @@
 package com.burritobot.command
 
-import com.burritobot.external.TenorClient
+import com.burritobot.service.TenorClient
 import com.burritobot.util.sign
 import dev.kord.core.entity.Message
 

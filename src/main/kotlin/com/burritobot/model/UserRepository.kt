@@ -1,6 +1,5 @@
-package com.burritobot.user
+package com.burritobot.model
 
-import com.burritobot.emoji.Emoji
 import dev.kord.common.entity.Snowflake
 
 object UserRepository {

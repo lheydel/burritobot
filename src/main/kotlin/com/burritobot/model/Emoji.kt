@@ -1,4 +1,4 @@
-package com.burritobot.emoji
+package com.burritobot.model
 
 import dev.kord.common.entity.Snowflake
 import dev.kord.core.entity.ReactionEmoji

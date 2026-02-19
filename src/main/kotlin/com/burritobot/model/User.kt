@@ -1,6 +1,4 @@
-package com.burritobot.user
-
-import com.burritobot.emoji.Emoji
+package com.burritobot.model
 
 data class User(
     val id: Long,

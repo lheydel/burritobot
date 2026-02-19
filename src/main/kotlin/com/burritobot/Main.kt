@@ -1,7 +1,5 @@
 package com.burritobot
 
-import com.burritobot.config.Config
-import com.burritobot.di.appModule
 import dev.kord.core.Kord
 import dev.kord.core.event.gateway.ReadyEvent
 import dev.kord.core.on

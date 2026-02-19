@@ -1,6 +1,6 @@
 package com.burritobot.command
 
-import com.burritobot.emoji.Emoji
+import com.burritobot.model.Emoji
 import dev.kord.core.entity.Message
 
 class OkCommand : Command {
