@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./gradlew:*)",
+      "WebFetch(domain:mvnrepository.com)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
