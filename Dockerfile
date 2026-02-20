@@ -7,7 +7,7 @@ COPY gradle ./gradle
 COPY build.gradle.kts settings.gradle.kts gradle.properties ./
 COPY src ./src
 
-RUN ./gradlew shadowJar --no-daemon
+RUN chmod +x gradlew && ./gradlew shadowJar --no-daemon
 
 # Run stage
 FROM eclipse-temurin:21-jre-alpine
