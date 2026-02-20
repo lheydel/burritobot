@@ -10,7 +10,7 @@ object UserRepository {
     private val BOT_BTEAM = User(726765421495320631, Emoji.BURRITAL, isBot = true)
 
     private val users = listOf(HYRLOS, LOUEC, MROHMS, BOT_SOLO, BOT_BTEAM)
-    private val botIds = users.map { it.id }
+    private val botIds = users.filter { it.isBot }.map { it.id }
 
     fun getById(id: Snowflake): User? = users.find { Snowflake(it.id) == id }
 
