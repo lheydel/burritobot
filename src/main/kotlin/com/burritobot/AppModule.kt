@@ -6,11 +6,9 @@ import com.burritobot.command.HelpCommand
 import com.burritobot.command.InsultCommand
 import com.burritobot.command.OkCommand
 import com.burritobot.command.PdCommand
-import com.burritobot.command.SlashCommand
 import com.burritobot.command.SlashCommandHandler
 import com.burritobot.message.BotPueHandler
 import com.burritobot.message.KHandler
-import com.burritobot.message.MessageHandler
 import com.burritobot.message.MessageHandlerRegistry
 import com.burritobot.message.QuestionHandler
 import com.burritobot.message.RandomOkHandler
@@ -23,6 +21,7 @@ import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val appModule = module {
@@ -40,7 +39,7 @@ val appModule = module {
     single { TenorClient(get(), Config.tenorToken) }
     single { InsultService() }
 
-    single<List<SlashCommand>> {
+    single(named("slashCommands")) {
         val commands = mutableListOf(
             BlblblCommand(),
             OkCommand(),
@@ -52,9 +51,9 @@ val appModule = module {
         commands
     }
 
-    single { SlashCommandHandler(get()) }
+    single { SlashCommandHandler(get(named("slashCommands"))) }
 
-    single<List<MessageHandler>> {
+    single(named("messageHandlers")) {
         listOf(
             QuestionHandler(),
             RandomOkHandler(),
@@ -64,7 +63,7 @@ val appModule = module {
         )
     }
 
-    single { MessageHandlerRegistry(get()) }
+    single { MessageHandlerRegistry(get(named("messageHandlers"))) }
 
     factory { (kord: Kord) ->
         BurritoBot(kord, get(), get())

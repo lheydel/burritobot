@@ -2,6 +2,7 @@ package com.burritobot.message
 
 import com.burritobot.model.Emoji
 import com.burritobot.utils.chance
+import dev.kord.core.behavior.channel.createMessage
 import dev.kord.core.event.message.MessageCreateEvent
 import kotlin.random.Random
 
@@ -14,7 +15,10 @@ class QuestionHandler : MessageHandler {
                 rdm <= 0.99 -> Emoji.NON.formatted
                 else -> Emoji.MAYBE.formatted
             }
-            event.message.channel.createMessage(response)
+            event.message.channel.createMessage {
+                content = response
+                messageReference = event.message.id
+            }
         }
     }
 }
