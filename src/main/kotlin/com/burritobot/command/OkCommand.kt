@@ -1,14 +1,20 @@
 package com.burritobot.command
 
 import com.burritobot.model.Emoji
-import dev.kord.core.entity.Message
+import dev.kord.common.entity.Snowflake
+import dev.kord.core.Kord
+import dev.kord.core.behavior.interaction.respondPublic
+import dev.kord.core.event.interaction.GuildChatInputCommandInteractionCreateEvent
 
-class OkCommand : Command {
+class OkCommand : SlashCommand {
     override val name = "ok"
     override val description = "Send OK emoji"
 
-    override suspend fun execute(message: Message, args: List<String>) {
-        message.delete()
-        message.channel.createMessage(Emoji.OK1.formatted)
+    override suspend fun register(kord: Kord, guildId: Snowflake) {
+        kord.createGuildChatInputCommand(guildId, name, description)
+    }
+
+    override suspend fun handle(event: GuildChatInputCommandInteractionCreateEvent) {
+        event.interaction.respondPublic { content = Emoji.OK1.formatted }
     }
 }

@@ -2,7 +2,7 @@ package com.burritobot
 
 import com.burritobot.model.Emoji
 import com.burritobot.service.TenorClient
-import com.burritobot.util.chance
+import com.burritobot.utils.chance
 import dev.kord.core.entity.Message
 import dev.kord.core.entity.ReactionEmoji
 

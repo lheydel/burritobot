@@ -19,23 +19,31 @@ src/main/kotlin/com/burritobot/
 ├── AppModule.kt         # Koin dependency injection
 ├── BurritoBot.kt        # Bot event handling
 ├── ReactionHandler.kt   # Auto-reactions to messages
-├── command/             # Bot commands (!cmd, !gif, etc.)
+├── command/             # Slash commands
+│   ├── SlashCommand.kt           # Command interface
+│   ├── SlashCommandRegistry.kt   # Registers commands with Discord
+│   ├── SlashCommandHandler.kt    # Routes interactions to handlers
+│   ├── HelpCommand.kt
+│   ├── BlblblCommand.kt
+│   ├── OkCommand.kt
+│   ├── PdCommand.kt
+│   ├── GifCommand.kt
+│   └── InsultCommand.kt
 ├── model/               # Emoji, User, UserRepository
 ├── service/             # TenorClient, InsultService
 └── util/                # Extension functions
 ```
 
-## Commands
+## Slash Commands
 
-| Command | Description |
-|---------|-------------|
-| `!cmd` | List commands |
-| `!blblbl` | Burrito catchphrase |
-| `!ok` | Send OK emoji |
-| `!pd` | Send PD emoji |
-| `!noise <text>` | Text-to-speech (-v to keep message) |
-| `!gif <query>` | Search and send a GIF |
-| `!insult <target>` | Insult someone (compliments bots) |
+| Command | Parameters | Description |
+|---------|------------|-------------|
+| `/help` | - | List available commands (ephemeral) |
+| `/blblbl` | - | Burrito catchphrase |
+| `/ok` | - | Send OK emoji |
+| `/pd` | - | Send PD emoji |
+| `/gif` | `query?` | Search and send a GIF (defaults to "burrito") |
+| `/insult` | `target` | Insult someone (compliments bots) |
 
 ## Build & Run
 
@@ -57,11 +65,13 @@ make logs    # Follow logs
 
 - `BOT_TOKEN` - Discord bot token (required)
 - `TENOR_TOKEN` - Tenor API key (required)
+- `GUILD_IDS` - Comma-separated Discord guild IDs (required)
 
 ## Conventions
 
 - Use extension functions for shared behavior (see `util/`)
 - Emojis are defined as `data object` in sealed class `Emoji`
 - Users with signatures are registered in `UserRepository`
-- Commands implement the `Command` interface
+- Slash commands implement the `SlashCommand` interface
+- Commands are registered in `SlashCommandRegistry` and routed by `SlashCommandHandler`
 - All message content is normalized (lowercase + unaccent) before matching

@@ -1,25 +1,36 @@
 package com.burritobot.command
 
 import com.burritobot.service.TenorClient
-import com.burritobot.util.sign
-import dev.kord.core.entity.Message
+import dev.kord.common.entity.Snowflake
+import dev.kord.core.Kord
+import dev.kord.core.behavior.interaction.response.respond
+import dev.kord.core.event.interaction.GuildChatInputCommandInteractionCreateEvent
+import dev.kord.rest.builder.interaction.string
 
 class GifCommand(
     private val tenorClient: TenorClient
-) : Command {
+) : SlashCommand {
     override val name = "gif"
     override val description = "Search and send a GIF"
 
-    override suspend fun execute(message: Message, args: List<String>) {
-        message.delete()
-        val query = args.joinToString(" ").ifBlank { "burrito" }
+    override suspend fun register(kord: Kord, guildId: Snowflake) {
+        kord.createGuildChatInputCommand(guildId, name, description) {
+            string("query", "Search term (defaults to 'burrito')") {
+                required = false
+            }
+        }
+    }
+
+    override suspend fun handle(event: GuildChatInputCommandInteractionCreateEvent) {
+        val query = event.interaction.command.strings["query"] ?: "burrito"
+
+        val deferred = event.interaction.deferPublicResponse()
         val gifUrl = tenorClient.searchGif(query)
 
         if (gifUrl != null) {
-            val gifMessage = message.channel.createMessage(gifUrl)
-            gifMessage.sign(message.author?.id)
+            deferred.respond { content = gifUrl }
         } else {
-            message.channel.createMessage("Aucun gif trouvé pour la requête : \"$query\"")
+            deferred.respond { content = "Aucun gif trouvé pour la requête : \"$query\"" }
         }
     }
 }

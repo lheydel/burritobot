@@ -1,4 +1,4 @@
-package com.burritobot.util
+package com.burritobot.utils
 
 import com.burritobot.model.UserRepository
 import dev.kord.common.entity.Snowflake

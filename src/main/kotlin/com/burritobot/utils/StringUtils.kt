@@ -1,4 +1,4 @@
-package com.burritobot.util
+package com.burritobot.utils
 
 import java.text.Normalizer
 

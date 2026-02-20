@@ -1,14 +1,13 @@
 package com.burritobot
 
 import com.burritobot.command.BlblblCommand
-import com.burritobot.command.CmdCommand
-import com.burritobot.command.Command
-import com.burritobot.command.CommandHandler
 import com.burritobot.command.GifCommand
+import com.burritobot.command.HelpCommand
 import com.burritobot.command.InsultCommand
-import com.burritobot.command.NoiseCommand
 import com.burritobot.command.OkCommand
 import com.burritobot.command.PdCommand
+import com.burritobot.command.SlashCommand
+import com.burritobot.command.SlashCommandHandler
 import com.burritobot.service.InsultService
 import com.burritobot.service.TenorClient
 import dev.kord.core.Kord
@@ -35,19 +34,19 @@ val appModule = module {
     single { InsultService() }
     single { ReactionHandler(get()) }
 
-    single<List<Command>> {
-        listOf(
-            CmdCommand { get() },
+    single<List<SlashCommand>> {
+        val commands = mutableListOf<SlashCommand>(
             BlblblCommand(),
             OkCommand(),
             PdCommand(),
-            NoiseCommand(),
             GifCommand(get()),
             InsultCommand(get())
         )
+        commands.add(HelpCommand(commands))
+        commands
     }
 
-    single { CommandHandler(get()) }
+    single { SlashCommandHandler(get()) }
 
     factory { (kord: Kord) ->
         BurritoBot(kord, get(), get())

@@ -1,11 +1,12 @@
 package com.burritobot
 
-import com.burritobot.command.CommandHandler
+import com.burritobot.command.SlashCommandHandler
 import com.burritobot.model.Emoji
-import com.burritobot.util.chance
-import com.burritobot.util.normalize
-import com.burritobot.util.sign
+import com.burritobot.utils.chance
+import com.burritobot.utils.normalize
+import com.burritobot.utils.sign
 import dev.kord.core.Kord
+import dev.kord.core.event.interaction.GuildChatInputCommandInteractionCreateEvent
 import dev.kord.core.event.message.MessageCreateEvent
 import dev.kord.core.on
 import org.slf4j.LoggerFactory
@@ -13,18 +14,18 @@ import kotlin.random.Random
 
 class BurritoBot(
     private val kord: Kord,
-    private val commandHandler: CommandHandler,
+    private val slashCommandHandler: SlashCommandHandler,
     private val reactionHandler: ReactionHandler
 ) {
     private val logger = LoggerFactory.getLogger(BurritoBot::class.java)
 
     fun setupListeners() {
+        kord.on<GuildChatInputCommandInteractionCreateEvent> {
+            slashCommandHandler.handle(this)
+        }
+
         kord.on<MessageCreateEvent> {
             val content = message.content.normalize()
-
-            if (commandHandler.handle(message)) {
-                return@on
-            }
 
             if (content.endsWith("?") && chance(0.01)) {
                 val rdm = Random.nextDouble()
