@@ -8,6 +8,13 @@ import com.burritobot.command.OkCommand
 import com.burritobot.command.PdCommand
 import com.burritobot.command.SlashCommand
 import com.burritobot.command.SlashCommandHandler
+import com.burritobot.message.BotPueHandler
+import com.burritobot.message.KHandler
+import com.burritobot.message.MessageHandler
+import com.burritobot.message.MessageHandlerRegistry
+import com.burritobot.message.QuestionHandler
+import com.burritobot.message.RandomOkHandler
+import com.burritobot.message.ReactionHandler
 import com.burritobot.service.InsultService
 import com.burritobot.service.TenorClient
 import dev.kord.core.Kord
@@ -32,10 +39,9 @@ val appModule = module {
 
     single { TenorClient(get(), Config.tenorToken) }
     single { InsultService() }
-    single { ReactionHandler(get()) }
 
     single<List<SlashCommand>> {
-        val commands = mutableListOf<SlashCommand>(
+        val commands = mutableListOf(
             BlblblCommand(),
             OkCommand(),
             PdCommand(),
@@ -47,6 +53,18 @@ val appModule = module {
     }
 
     single { SlashCommandHandler(get()) }
+
+    single<List<MessageHandler>> {
+        listOf(
+            QuestionHandler(),
+            RandomOkHandler(),
+            BotPueHandler(),
+            KHandler(),
+            ReactionHandler(get())
+        )
+    }
+
+    single { MessageHandlerRegistry(get()) }
 
     factory { (kord: Kord) ->
         BurritoBot(kord, get(), get())

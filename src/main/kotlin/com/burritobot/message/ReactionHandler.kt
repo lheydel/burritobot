@@ -1,14 +1,15 @@
-package com.burritobot
+package com.burritobot.message
 
 import com.burritobot.model.Emoji
 import com.burritobot.service.TenorClient
 import com.burritobot.utils.chance
 import dev.kord.core.entity.Message
 import dev.kord.core.entity.ReactionEmoji
+import dev.kord.core.event.message.MessageCreateEvent
 
 class ReactionHandler(
     private val tenorClient: TenorClient
-) {
+) : MessageHandler {
     private val reactions = listOf(
         Reaction(
             patterns = listOf("burrito", "burrital"),
@@ -42,10 +43,10 @@ class ReactionHandler(
         )
     )
 
-    suspend fun handle(message: Message, normalizedContent: String) {
+    override suspend fun handle(event: MessageCreateEvent, normalizedContent: String) {
         reactions
             .filter { it.matches(normalizedContent) }
-            .forEach { it.action(message) }
+            .forEach { it.action(event.message) }
     }
 }
 
