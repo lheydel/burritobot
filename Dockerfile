@@ -2,12 +2,19 @@
 FROM eclipse-temurin:21-jdk AS build
 
 WORKDIR /app
+
+# Copy gradle wrapper first (cached unless wrapper changes)
 COPY gradlew ./
 COPY gradle ./gradle
-COPY build.gradle.kts settings.gradle.kts gradle.properties ./
-COPY src ./src
+RUN chmod +x gradlew
 
-RUN chmod +x gradlew && ./gradlew shadowJar --no-daemon
+# Copy build files and download dependencies (cached unless deps change)
+COPY build.gradle.kts settings.gradle.kts gradle.properties ./
+RUN ./gradlew dependencies --no-daemon
+
+# Copy source and build (only this runs on code changes)
+COPY src ./src
+RUN ./gradlew shadowJar --no-daemon
 
 # Run stage
 FROM eclipse-temurin:21-jre-alpine
